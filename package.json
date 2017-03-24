@@ -8,6 +8,7 @@
     "start": "nodemon ./development/run src/server/server",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
+    "client": "webpack-dev-server",
     "demo:client": "node ./development/run src/client/client"
   },
   "repository": {
@@ -48,6 +49,7 @@
   },
   "homepage": "https://github.com/xebia/realtime-graphql#readme",
   "devDependencies": {
+    "babel-loader": "^6.4.1",
     "webpack": "^2.3.1",
     "webpack-dev-server": "^2.4.2"
   }
