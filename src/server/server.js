@@ -3,6 +3,7 @@ import graphqlHTTP from 'express-graphql';
 import { SubscriptionManager, PubSub } from 'graphql-subscriptions';
 import { createServer } from 'http';
 import { SubscriptionServer } from 'subscriptions-transport-ws';
+import { setComment } from './comment-store';
 
 import schema from './schema';
 
@@ -75,8 +76,10 @@ const subscriptionServer = new SubscriptionServer(
 );
 
 setInterval(() => {
-  pubsub.publish('newCommentsChannel', {
+  const comment = {
     author: 'bla',
     comment: `bla bla ${(new Date()).getTime()}`,
-  });
+  };
+  setComment(comment);
+  pubsub.publish('newCommentsChannel', comment);
 }, 1000);

@@ -2,6 +2,7 @@ import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
 import casual from 'casual';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
+import { getComment } from './comment-store';
 
 const typeDefs = [
   readFileSync(resolve(__dirname, 'schema.graphql')).toString(),
@@ -27,7 +28,7 @@ addMockFunctionsToSchema({
       };
     },
     Comment() {
-      return { author: casual.full_name, comment: casual.sentence };
+      return getComment();
     },
   },
 });
