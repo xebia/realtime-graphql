@@ -26,6 +26,9 @@ addMockFunctionsToSchema({
         price: casual.integer(100, 9e5),
       };
     },
+    Comment() {
+      return { author: casual.full_name, comment: casual.sentence };
+    },
   },
 });
 

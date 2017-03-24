@@ -11,6 +11,25 @@ const pubsub = new PubSub();
 const subscriptionManager = new SubscriptionManager({
   schema,
   pubsub,
+  setupFunctions: {
+    commentAdded: (options, args) => ({
+      newCommentsChannel: {
+      },
+    }),
+  },
+});
+
+subscriptionManager.subscribe({
+  query: `
+    subscription newComments{
+      commentAdded { # <-- this is the subscription name
+        author
+        comment
+      }
+    }
+  `,
+  context: {},
+  callback: (err, data) => console.log(data),
 });
 
 const PORT = 3000;
@@ -54,3 +73,10 @@ const subscriptionServer = new SubscriptionServer(
     path: '/',
   },
 );
+
+setInterval(() => {
+  pubsub.publish('newCommentsChannel', {
+    author: 'bla',
+    comment: `bla bla ${(new Date()).getTime()}`,
+  });
+}, 1000);
