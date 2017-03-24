@@ -10,10 +10,18 @@ const typeDefs = [
 
 const executableSchema = makeExecutableSchema({
   typeDefs,
+  resolvers: {
+    Mutation: {
+      updateComment(_, { id }) {
+        console.log(`updating comment ${id}`)
+      }
+    }
+  }
 });
 
 addMockFunctionsToSchema({
   schema: executableSchema,
+  preserveResolvers: true,
   mocks: {
     SearchResult() {
       return {
