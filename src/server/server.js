@@ -25,7 +25,6 @@ const PORT = 3000;
 
 const app = express();
 
-console.log(path.resolve('src/client-au/dist/'));
 app.use(express.static(path.resolve('src/client-au/dist/')));
 
 app.use('/graphql', graphqlHTTP({
