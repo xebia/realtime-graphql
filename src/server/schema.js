@@ -12,12 +12,14 @@ const executableSchema = makeExecutableSchema({
   typeDefs,
   resolvers: {
     Mutation: {
-      commentAdded(_, { author }) {
-        const comment = setComment({
-          ...getComment(),
-          author,
-        });
-        pubsub.publish('newCommentsChannel', comment);
+      commentAdded(_, { author, comment }) {
+        pubsub.publish('newCommentsChannel',
+          setComment({
+            ...getComment(),
+            author,
+            comment,
+          }),
+        );
       },
     },
   },

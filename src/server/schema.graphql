@@ -30,7 +30,7 @@ type Subscription {
   commentAdded: Comment
 }
 type Mutation {
-  commentAdded(author: String!): Comment
+  commentAdded(author: String!, comment: String!): Comment
 }
 
 schema {
