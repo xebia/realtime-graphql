@@ -1,28 +1,29 @@
-import ApolloClient, {createNetworkInterface, NetworkInterface} from 'apollo-client';
-import gql from 'graphql-tag';
+import { CommentService } from './comment/comment-service';
+import {Comment} from './comment/comment';
+import {autoinject} from 'aurelia-framework';
+import {Subscription} from 'rxjs/Rx'
 
+@autoinject()
 export class Apollo {
-  networkInterface: NetworkInterface;
-  client: ApolloClient;
+  comment: Comment;
+  _commentSubscription: Subscription;
 
-  attached() {
+  constructor(
+    private commentService: CommentService
+  ) {
+    
+  }
+
+  async attached() {
     console.log("apollo attached");
-    this.networkInterface = createNetworkInterface("http://localhost:3000/graphql");
-    this.client = new ApolloClient({
-      networkInterface: this.networkInterface
-    });
+    await this.commentService.init();
 
-    this.client.query({
-      query: gql`{
-        search(query: "bank", offset: 4, limit:4) {
-        total
-        results {
-            id
-            name
-            description
-            price
-          }
-      } }`
-    });
+    this._commentSubscription = this.commentService.comment.subscribe((comment)=>{
+      this.comment = comment;
+    })
+  }
+
+  detached() {
+    this._commentSubscription.unsubscribe();
   }
 }

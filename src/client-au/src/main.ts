@@ -1,4 +1,5 @@
-﻿import {Aurelia} from 'aurelia-framework';
+﻿import { CommentService } from './comment/comment-service';
+import {Aurelia} from 'aurelia-framework';
 // we want font-awesome to load as soon as possible to show the fa-spinner
 import '../styles/styles.css';
 import 'font-awesome/css/font-awesome.css';
