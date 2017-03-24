@@ -31,27 +31,19 @@ const apolloClient = new ApolloClient({
 
 window.apolloClient = apolloClient;
 
-// apolloClient.subscribeToMore({
-  // document: gql`
-    // subscription onCommentAdded{
-      // commentAdded{
-        // author
-        // comment
-      // }
-    // }`,
-  // variables: {},
-  // updateQuery: (prev, { subscriptionData }) => {
-         // // Modify your store and return new state with the new arrived data
-  // },
-// });
-
-wsClient.subscribe({
-  query: `
-    subscription newComments{
-      commentAdded { # <-- this is the subscription name
+apolloClient.subscribe({
+  query: gql`
+    subscription commentAdded{
+      commentAdded{
         author
         comment
       }
-    }
-  `,
-}, console.log.bind(console));
+    }`
+  })
+  .subscribe({
+    next(data) {
+      console.log(data)
+    },
+    error(err) {console.log(err)}
+  })
+
