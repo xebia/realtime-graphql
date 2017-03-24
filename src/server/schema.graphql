@@ -16,6 +16,9 @@ type Query {
     offset: Int = 0
     limit: Int!
   ): SearchResult
+  comment(
+    query: String = ""
+  ): Comment
 }
 
 type Comment {
