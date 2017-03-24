@@ -8,7 +8,7 @@
     "start": "nodemon -e js,graphql ./development/run src/server/server",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
-    "client": "webpack-dev-server",
+    "client": "webpack-dev-server --hot",
     "demo:client": "node ./development/run src/client/client"
   },
   "repository": {
