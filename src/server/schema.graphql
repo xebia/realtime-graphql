@@ -26,6 +26,9 @@ type Comment {
 type Subscription {
   commentAdded: Comment
 }
+type Mutation {
+  commentAdded(author: String!): Comment
+}
 
 type Mutation {
   updateComment(

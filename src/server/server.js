@@ -1,13 +1,12 @@
 import express from 'express';
+import cors from 'cors';
 import graphqlHTTP from 'express-graphql';
-import { SubscriptionManager, PubSub } from 'graphql-subscriptions';
+import { SubscriptionManager } from 'graphql-subscriptions';
 import { createServer } from 'http';
 import { SubscriptionServer } from 'subscriptions-transport-ws';
-import { setComment } from './comment-store';
+import { setComment, pubsub } from './comment-store';
 
 import schema from './schema';
-
-const pubsub = new PubSub();
 
 const subscriptionManager = new SubscriptionManager({
   schema,
@@ -23,6 +22,9 @@ const subscriptionManager = new SubscriptionManager({
 const PORT = 3000;
 
 const app = express();
+
+app.use(cors());
+app.options('*', cors());
 
 app.use('/graphql', graphqlHTTP({
   schema,
@@ -62,11 +64,11 @@ const subscriptionServer = new SubscriptionServer(
   },
 );
 
-setInterval(() => {
-  const comment = {
-    author: 'bla',
-    comment: `bla bla ${(new Date()).getTime()}`,
-  };
-  setComment(comment);
-  pubsub.publish('newCommentsChannel', comment);
-}, 1000);
+// setInterval(() => {
+//   const comment = {
+//     author: 'bla',
+//     comment: `bla bla ${(new Date()).getTime()}`,
+//   };
+//   setComment(comment);
+//   pubsub.publish('newCommentsChannel', comment);
+// }, 1000);

@@ -2,7 +2,7 @@ import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
 import casual from 'casual';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
-import { getComment } from './comment-store';
+import { getComment, pubsub, setComment } from './comment-store';
 
 const typeDefs = [
   readFileSync(resolve(__dirname, 'schema.graphql')).toString(),
@@ -12,11 +12,15 @@ const executableSchema = makeExecutableSchema({
   typeDefs,
   resolvers: {
     Mutation: {
-      updateComment(_, { id }) {
-        console.log(`updating comment ${id}`)
-      }
-    }
-  }
+      commentAdded(_, { author }) {
+        const comment = setComment({
+          ...getComment(),
+          author,
+        });
+        pubsub.publish('newCommentsChannel', comment);
+      },
+    },
+  },
 });
 
 addMockFunctionsToSchema({
