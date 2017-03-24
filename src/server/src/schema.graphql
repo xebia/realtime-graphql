@@ -1,0 +1,23 @@
+type Product {
+  id: ID!
+  name: String!
+  description: String!
+  price: Int!
+}
+
+type SearchResult {
+  total: Int!
+  results: [Product!]!
+}
+
+type Query {
+  search(
+    query: String!
+    offset: Int = 0
+    limit: Int!
+  ): SearchResult
+}
+
+schema {
+  query: Query
+}
