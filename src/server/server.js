@@ -20,19 +20,6 @@ const subscriptionManager = new SubscriptionManager({
   },
 });
 
-subscriptionManager.subscribe({
-  query: `
-    subscription newComments{
-      commentAdded { # <-- this is the subscription name
-        author
-        comment
-      }
-    }
-  `,
-  context: {},
-  callback: (err, data) => console.log(data),
-});
-
 const PORT = 3000;
 
 const app = express();
