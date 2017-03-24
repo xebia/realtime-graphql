@@ -1,0 +1,11 @@
+query {
+  search(query: "bank", offset: 4, limit:4) {
+    total
+    results {
+      id
+      name
+      description
+      price
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "env": {
+    "es6": true,
+    "jasmine": true,
+    "node": true,
+    "browser": true
+  },
+ "globals": {
+    "expect": false,
+    "jest": false
+  },
+  "extends": "airbnb-base",
+  "parser": "babel-eslint",
+  "rules": {
+    "import/no-extraneous-dependencies": [2, {"devDependencies": [
+        "development/**/*",
+        "test/**/*",
+        "**/*-spec.js",
+        "webpack.server.config.js"
+    ]}],
+    "import/named": 2
+  }
+}
