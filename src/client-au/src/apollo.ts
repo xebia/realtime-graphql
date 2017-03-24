@@ -2,6 +2,8 @@ import { CommentService } from './comment/comment-service';
 import {Comment} from './comment/comment';
 import {autoinject, observable} from 'aurelia-framework';
 import {Subscription} from 'rxjs/Rx'
+import 'medium-editor/dist/css/medium-editor.css';
+import MediumEditor from 'medium-editor';
 
 @autoinject()
 export class Apollo {
@@ -10,6 +12,8 @@ export class Apollo {
 
   @observable
   commentbody: string;
+
+  editor: MediumEditor;
 
   constructor(
     private commentService: CommentService
@@ -25,6 +29,11 @@ export class Apollo {
       this.comment = comment;
       this.commentbody = this.commentbody || this.comment.comment;
     })
+
+    this.editor = new MediumEditor('.editable');
+    this.editor.subscribe('editableInput', (event, editable) => {
+        this.commentbody = editable.innerHTML;
+    });
   }
 
   detached() {
