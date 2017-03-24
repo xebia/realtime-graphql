@@ -1,6 +1,9 @@
 import { PubSub } from 'graphql-subscriptions';
 
-let comment;
+let comment = {
+  author: undefined,
+  comment: undefined,
+};
 
 export function setComment(c) {
   comment = c;
