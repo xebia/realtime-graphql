@@ -30,12 +30,6 @@ type Mutation {
   commentAdded(author: String!): Comment
 }
 
-type Mutation {
-  updateComment(
-    id: Int!
-  ): Comment
-}
-
 schema {
   query: Query
   subscription: Subscription

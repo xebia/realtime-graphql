@@ -61,7 +61,7 @@ setInterval(() => {
     mutation: commentAdded,
     variables: {
       author: 'foo bar',
-    } })((data) => {
+    } }).then((data) => {
       console.log('data', data);
     });
 }, 3000);
