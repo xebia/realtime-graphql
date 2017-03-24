@@ -1,4 +1,15 @@
 <template>
-  <h1>apollo comment</h1>
-  <span>${comment.comment}</span>
+  <div class="container-fluid">
+    <div class="grid">
+      <div class="text-center">
+        <h1>apollo comment</h1>
+      </div>
+      <div class="col-md-6">
+        <pre>${comment.comment}</pre>
+      </div>
+      <div class="col-md-6">
+        <textarea type="text" value.bind="commentbody" style="width:100%" rows="20"></textarea>
+      </div>
+    </div>
+  </div>
 </template>

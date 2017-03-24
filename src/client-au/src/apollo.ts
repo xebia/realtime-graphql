@@ -23,9 +23,8 @@ export class Apollo {
 
     this._commentSubscription = this.commentService.comment.subscribe((comment)=>{
       this.comment = comment;
+      this.commentbody = this.commentbody || this.comment.comment;
     })
-
-    this.commentService.mutateComment("test 123");
   }
 
   detached() {
