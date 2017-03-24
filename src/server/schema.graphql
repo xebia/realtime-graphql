@@ -18,6 +18,16 @@ type Query {
   ): SearchResult
 }
 
+type Comment {
+  author: String!
+  comment: String!
+}
+
+type Subscription {
+  commentAdded: Comment
+}
+
 schema {
   query: Query
+  subscription: Subscription
 }
