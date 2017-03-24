@@ -38,12 +38,30 @@ apolloClient.subscribe({
         author
         comment
       }
-    }`
-  })
+    }`,
+})
   .subscribe({
     next(data) {
-      console.log(data)
+      console.log(data);
     },
-    error(err) {console.log(err)}
-  })
+    error(err) { console.log(err); },
+  });
 
+setInterval(() => {
+  const commentAdded = gql`
+    mutation commentAdded($author: String!) {
+      commentAdded(author: $author) {
+        author
+        comment
+      }
+    }
+  `;
+
+  apolloClient.mutate({
+    mutation: commentAdded,
+    variables: {
+      author: 'foo bar',
+    } })((data) => {
+      console.log('data', data);
+    });
+}, 3000);

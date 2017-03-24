@@ -29,8 +29,18 @@ type Comment {
 type Subscription {
   commentAdded: Comment
 }
+type Mutation {
+  commentAdded(author: String!): Comment
+}
+
+type Mutation {
+  updateComment(
+    id: Int!
+  ): Comment
+}
 
 schema {
   query: Query
   subscription: Subscription
+  mutation: Mutation
 }
