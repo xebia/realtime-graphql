@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./src/server/development/run src/server",
+    "start": "nodemon ./development/run src/server/server",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
-    "demo:client": "node ./development/run src/client"
+    "demo:client": "node ./development/run src/client/client"
   },
   "repository": {
     "type": "git",
