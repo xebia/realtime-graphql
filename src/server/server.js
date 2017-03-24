@@ -67,11 +67,9 @@ const subscriptionServer = new SubscriptionServer(
   },
 );
 
-// setInterval(() => {
-//   const comment = {
-//     author: 'bla',
-//     comment: `bla bla ${(new Date()).getTime()}`,
-//   };
-//   setComment(comment);
-//   pubsub.publish('newCommentsChannel', comment);
-// }, 1000);
+setInterval(() => {
+  pubsub.publish('newCommentsChannel', setComment({
+    author: 'server.js',
+    comment: `servertime is now: ${(new Date()).getTime()}`,
+  }));
+}, 10000);
